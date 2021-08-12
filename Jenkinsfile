@@ -1,12 +1,10 @@
+@Library('CICD_Node_lib@master')_
+
 node{
     stage("Git Clone"){
-        deleteDir()
-        print("Git Clone")
-        checkout([$class: 'GitSCM', branches: [[name: 'main']],
-        userRemoteConfigs: [[url: 'https://github.com/aimanshahbad1999/docker-asg.git']]])
-        def addr=pwd()
-        print(pwd)
-        sh "ls"
+
+        gitClone "https://github.com/aimanshahbad1999/docker-asg.git"
+      
     }
     stage("Build"){
         zip archive: true, dir: '', glob: '', zipFile: 'docker-asg.zip'
